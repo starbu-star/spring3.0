@@ -1,0 +1,34 @@
+package com.exe.springJdbcTemplate;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import javax.sql.DataSource;
+
+public class CustomDAO {
+	
+	private DataSource dataSource;
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource=dataSource; //의존성 주입 완료
+		
+	}
+	Connection conn = dataSource.getConnection();
+	
+	public int insertData(CustomDTO dto) {
+		
+		int result = 0 ;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			sql = "insert into custom(id,name,age) values(?,?,?);";
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+
+}

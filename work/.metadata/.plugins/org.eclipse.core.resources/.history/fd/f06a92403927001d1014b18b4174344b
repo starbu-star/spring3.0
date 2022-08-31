@@ -1,0 +1,17 @@
+package com.exe.springJdbcTemplate;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+
+
+public class CustomDTO {
+	//	private @Getter @Setter int id; 이렇게해도 게터세터 만들어짐
+	private int id;
+	private String name;
+	private int age;
+	
+
+}

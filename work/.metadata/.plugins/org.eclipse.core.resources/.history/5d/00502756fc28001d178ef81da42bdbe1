@@ -1,0 +1,26 @@
+package com.exe.board;
+
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Answer {
+
+	//답변을 저장하는 테이블
+	@Id
+	private Integer id;
+	
+	@Column(columnDefinition = "TEXT")
+	private String content;
+	private LocalDateTime createdDate;
+	
+	
+}

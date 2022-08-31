@@ -1,0 +1,13 @@
+package com.exe.springdi4;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyMessageService implements MessageService{
+
+	public String getMessage() {
+		
+		return "¾È³ç ¿À´ÃÀº ºÒ±ÝÀÌ¾å";
+	}
+
+}

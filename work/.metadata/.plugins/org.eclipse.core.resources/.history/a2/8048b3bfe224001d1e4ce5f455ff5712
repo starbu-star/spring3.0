@@ -1,0 +1,10 @@
+package com.exe.springdi1;
+
+public class Message {
+	
+	public void sayHello(String name) {
+		System.out.println(name + "님 hello");
+	}
+
+}
+//이 클래스 사용하려면 반드시 실행하는 클래스 있어야함.

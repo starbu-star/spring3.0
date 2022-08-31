@@ -1,0 +1,17 @@
+package com.exe.springJdbcTemplate;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter //이렇게하면 3개 변수의 getter가 만들어짐 lombok으로 해야함
+@Setter
+@ToString
+public class CustomDTO {
+	
+	private int id;
+	private String name;
+	private int age;
+	
+
+}

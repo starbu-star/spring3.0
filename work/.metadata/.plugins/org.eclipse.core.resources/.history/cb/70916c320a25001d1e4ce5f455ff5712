@@ -1,0 +1,12 @@
+package com.exe.springmvc;
+
+import org.springframework.stereotype.Controller;
+/**testcontroller ÀÇ °´Ã¼»ý¼º*/
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller("test.controller")
+public class TestContoller {
+	@RequestMapping(value = "/test/param.action",method = req)
+	public String processGetRequest() {
+		
+	}
+}

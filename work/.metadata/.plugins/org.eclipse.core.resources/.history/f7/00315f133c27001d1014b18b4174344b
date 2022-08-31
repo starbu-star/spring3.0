@@ -1,0 +1,13 @@
+package com.exe.springJdbcTemplate;
+
+import javax.sql.DataSource;
+
+public class CustomDAO {
+	
+	private DataSource dataSource;
+	
+	public void setDataSource() {
+		
+	}
+
+}

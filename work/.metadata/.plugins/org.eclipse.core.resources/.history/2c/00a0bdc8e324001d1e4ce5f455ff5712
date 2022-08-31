@@ -1,0 +1,13 @@
+package com.exe.springdi2;
+
+public class MessageCall {
+
+	public static void main(String[] args) {
+		MessageKr ob1 = new MessageKr();
+		ob1.sayHello("¹ÚÁö¼º");
+		
+		MessageEn ob2 = new MessageEn();
+		ob2.sayHello("jisung");
+	}
+
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		https://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Example configuration to get you started.</description>
+
+	<context:component-scan base-package="*" />
+	
+	<!-- 객체생성 -->
+	<bean id="message" class="com.exe.springdi3.MessageEn"/>
+	
+	
+	<!-- 생상자를 통한 의존성 주입 -->
+	<bean id="serviceConsumer" class="com.exe.springdi4.ServiceConsumer">
+	<!-- 이렇게 이미 기본생성자 생성해둬서  아래 constructor-arg!! 로 생성이 됨 . -->
+		<constructor-arg ref="messageService"/>
+		<property name="timeService" ref="timeService"/>
+	</bean>
+	
+	
+	<bean id="messageService" class="com.exe.springdi4.MyMessageService"/>
+	<bean id="timeService" class="com.exe.springdi4.MyTimeService"/>
+</beans>

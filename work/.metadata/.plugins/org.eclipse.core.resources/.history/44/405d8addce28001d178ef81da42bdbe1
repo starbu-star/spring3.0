@@ -1,0 +1,25 @@
+package com.exe.springwebview;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.servlet.view.document.AbstractJExcelView;
+
+import jxl.write.WritableWorkbook;
+
+public class CustomExcelView extends AbstractJExcelView{
+
+	@Override
+	protected void buildExcelDocument(Map<String, Object> model, WritableWorkbook workbook, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		response.addHeader("content-Disposition",
+				"attachment;fileName=sales.xls");
+		
+		
+		
+	}
+
+}

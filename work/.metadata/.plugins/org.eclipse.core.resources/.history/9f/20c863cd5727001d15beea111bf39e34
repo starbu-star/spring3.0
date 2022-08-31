@@ -1,0 +1,63 @@
+package com.exe.springJdbcTemplate;
+
+import java.util.List;
+
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import com.exe.springJdbcTemplate.CustomDAO2;
+
+public class CustomMain {
+
+	public static void main(String[] args) {
+		
+		GenericXmlApplicationContext context =
+				new GenericXmlApplicationContext("app-context.xml");
+		
+		CustomDAO2 dao = (CustomDAO2)context.getBean("customDAO2"); //customDAO 라는 bean줘봐
+		
+		CustomDTO dto;
+		
+		
+		
+		// insert
+		
+		dto=new CustomDTO();
+		dto.setId(111);
+		dto.setName("유인나");
+		dto.setAge(29);
+		
+		dao.insertData(dto);
+		System.out.println("insert 완료");
+	
+		//수정
+//		dto= new CustomDTO();
+//		dto.setId(111);
+//		dto.setName("안젤리");
+//		dto.setAge(30);
+//		
+//		dao.updateDate(dto);
+//		System.out.println("update 완료");
+	
+		//delete
+		
+//		dao.deleteData(111);
+		
+		/**하나의데이터 
+		dto=dao.getReadData(111);
+		if(dto!=null) {
+			System.out.printf("%d %s %d \n", dto.getId(),dto.getName(),dto.getAge());
+		}
+		System.out.println("하나의 데이터 나오게 했땁!");
+		*/
+		/**list*/
+		List<CustomDTO> lists = dao.getList();
+		for(CustomDTO dto1 :lists) {
+			System.out.printf("%d %s %d \n", dto1.getId(),dto1.getName(),dto1.getAge());
+		}
+		System.out.println("select 완료");
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.exe.aop;
+
+public class MyAfterThrowingAdvice {
+	public void afterThrowingMethodCall() {
+		//에러가 나야 이게 나온답
+		System.out.println("메소드 에러 발생후 실행(aftef throw)");
+	}
+
+}

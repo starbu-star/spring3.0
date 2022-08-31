@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	https://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		https://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop
+		https://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<description>Example configuration to get you started.</description>
+
+	<context:component-scan base-package="com.exe.aop" />
+	<!-- execution(메소드접근지정자 반환값 패키지.클래스.메소드명(인수)) -->
+	<bean id="beforeAdvice" class="com.exe.aop.MyBeforeAdvice"/>
+	<bean id="afterAdvice" class="com.exe.aop.MyAfterAdvice"/>
+	<bean id="aroundAdvice" class="com.exe.aop.MyAroundAdvice"/>
+	<aop:config>
+<!-- 
+		<aop:aspect ref="beforeAdvice">
+		 어드바이스 어디에 적용할지 정하는거> 포인트컷 
+			<aop:pointcut id="beforePointcut"
+			 expression="execution(public void com..aop.*.*(..))" />
+			 
+			 <aop:before method="beforeMethodCall" pointcut-ref="beforePointcut"/>before 은 메소드뒤에 실행할 장소 필요
+		
+		</aop:aspect>
+		<aop:aspect ref="afterAdvice">
+		<aop:pointcut expression="execution(public void com..aop.*.*Some*2(..))" id="afterPointcut"/>
+		<aop:after method="afterMethodCall" pointcut-ref="afterPointcut"/>
+		</aop:aspect>이렇게 하면 메소드 기준 비포 에프터가 뜬다.  -->
+		
+		
+		 <aop:aspect ref="aroundAdvice">
+		<aop:pointcut expression="execution(public void com..aop.*.*(..))" id="aroundPointcut"/>
+		<aop:around method="aroundMethodCall" pointcut-ref="aroundPointcut"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	
+	
+
+</beans>

@@ -1,0 +1,21 @@
+package com.exe.aop;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+
+public class MyAroundAdvice {
+
+	public Object aroundMethodCall(ProceedingJoinPointnt) {
+		
+		Object result = null;
+		
+		try {
+			System.out.println("메소드 실행전(Around Before)");
+			result = joinPoint.proceed();
+			
+			System.out.println("메소드 실행후(Around After)");
+			result = joinPoint.proceed();
+		} catch (Throwable e) {
+			
+		}
+	}
+}

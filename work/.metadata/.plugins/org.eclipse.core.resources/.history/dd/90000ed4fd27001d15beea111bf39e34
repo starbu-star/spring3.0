@@ -1,0 +1,87 @@
+package com.jdbc.util;
+
+public class MyPage {
+	//�쟾泥� �럹�씠吏��쓽 媛��닔 援ы븯湲�
+	public int getPageCount(int numPerPage,int dataCount) {
+		int pageCount =0;
+		
+		pageCount = dataCount / numPerPage; //34/3
+		
+		if(dataCount % numPerPage !=0) {
+			pageCount++;
+			
+		}
+		return pageCount; //珥앺럹�씠吏� 諛섑솚
+	}
+
+	
+	//�럹�씠吏� 泥섎━ 硫붿냼�뱶
+	public String pageIndexList(int currentPage,int totalPage,String listUrl) {
+		
+		int numPerBlock = 5;//���씠�쟾 6 7 8 9 10 �떎�쓬 �뼳 �씠嫄� 媛��닔瑜� 留먰븳�떎. 
+		int currentPageSetup;// �씠嫄� �씠�쟾�뿉 �뱾�뼱媛��뒗 媛� ! �씠�쟾�쓣 �늻瑜대㈃ �뼱�뵒濡쒓��빞�븯�뒗吏� �씠�윴嫄�
+		int page;
+		
+		StringBuffer sb = new StringBuffer(); // �늻�쟻�떆�궗嫄곕씪 �벐�젅湲곌컪 �쟻寃뚯깮湲곌퀬 鍮좊Ⅸ �뒪�듃留곴컪 踰꾪띁 �벖�떎.
+		
+		if(currentPage==0||totalPage==0) {
+			return ""; //諛섑솚媛믪씠 �뒪�듃留곸씠�씪 �꼸媛믪쓣 媛�吏�怨� 諛섑솚�빐�빞�빐
+		}
+		//�룎�븘媛��뒗 二쇱냼 留뚮뱶�뒗嫄�!
+		//list.jsp
+		//list.jsp?serchKey=subject%serchValue=111
+		if(listUrl.indexOf("?")!=-1) {
+			listUrl =listUrl+"&";
+		}else {
+			listUrl = listUrl + "?";
+			//list.jsp?pageNum=3 �씠�젃寃� �븯湲곗쐞�빐 ? 瑜� 遺숈씠�뒗嫄�!
+			//臾쇱쓬�몴媛� �엳�뒗 �긽�깭�뒗 寃��깋�쓣 �븳 �긽�깭�뿉�뒗 ? 瑜� 媛�吏�怨좎엳�떎                                           
+		}
+		
+		//���씠�쟾 6 7 8 9 10 �떎�쓬 �뼳 �쓽 �닽�옄 援ы븯湲�!
+		//���씠�쟾 11 12 13 14 15 �떎�쓬 �뼳 >> �씠嫄� 怨듭떇!
+		currentPageSetup =(currentPage/numPerBlock)*numPerBlock; 
+		
+		if(currentPage%numPerBlock==0) {
+			currentPageSetup=currentPageSetup-numPerBlock;
+		}
+		//���씠�쟾 留뚯씪 1 2 3 4 5 �씪�븣�뒗 �씠�쟾�씠 蹂댁씠硫� �븞�릺怨� 5 6 7 8 9 10 �씪�븣�뒗 蹂댁씠硫� �븞�맖
+		if(totalPage>numPerBlock && currentPageSetup>0) {
+			sb.append("<a href=\""+listUrl+"pageNum="+currentPageSetup+"\">���씠�쟾</a>&nbsp;");
+			//<a href="list.jsp?pageNum=5">���씠�쟾</a>&nbsp;
+			
+		}
+		//���씠�쟾 6 7 8 9 10 �떎�쓬 �뼳 
+		//���씠�쟾 11 12 13 14 15 �떎�쓬 �뼳 
+		//諛붾줈媛�湲� �럹�씠吏� 留뚮뱾湲� �� �닽�옄 留뚮뱾湲�!!
+		
+		page = currentPageSetup+1; //�떆�옉�븯�뒗 �럹�씠吏�踰덊샇
+		
+		
+		while(page<=totalPage&&page <= (currentPageSetup + numPerBlock)) { //�궡媛� 李띻퀬�옄�븯�뒗 �럹�씠吏�蹂대떎 �옉嫄곕굹 媛숈쓣�븣源뚯� 肉뚮젮�씪
+			
+			if(page==currentPage) {
+				sb.append("<font color=\"Fuchsia\">"+page+"</font>&nbsp;");
+				//<font color="Fuchsia">9</font>&nbsp;
+				
+			}else {
+				sb.append("<a href=\"" + listUrl +"pageNum=" + page +"\">"+page+"</a>&nbsp;");
+				//<a href ="list.jsp"?pageNum=8">8</a>&nbsp;
+			}
+			page++; //�럹�씠吏�媛� 怨꾩냽 利앷��빐�빞�븯�땲源�!
+			
+			
+		}
+		//���씠�쟾 6 7 8 9 10 �떎�쓬 �뼳
+		//���씠�쟾 11 12 �떎�쓬�씠 蹂댁씠嫄곕굹 �븞蹂댁씠嫄곕굹 �븯寃� �빐�빞�빐
+		if(totalPage-currentPageSetup>numPerBlock) {
+			
+			sb.append("<a href=\""+listUrl +"pageNum="+page +"\">�떎�쓬�뼳</a>&nbsp;");
+			//<a href="list.jsp?pageNum=11">�떎�쓬 �뼳</a>&nbsp;
+			
+		}
+	return sb.toString();
+	}
+
+
+}

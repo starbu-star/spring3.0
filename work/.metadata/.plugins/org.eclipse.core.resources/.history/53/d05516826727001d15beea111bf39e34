@@ -1,0 +1,8 @@
+package com.exe.aop;
+
+public class MyBeforeAdvice {
+
+	//어드바이스 >> 내가할 코딩
+	//어디에 적용할진 포인트컷
+	
+}

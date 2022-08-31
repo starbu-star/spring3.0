@@ -1,0 +1,16 @@
+package com.exe.springdi4;
+
+import java.text.SimpleDateFormat;
+
+public class MyTimeService implements TimeService{
+
+	public String getTimeString() {
+		
+		/**캘린더 말고 이런 클래스도 있다*/
+		SimpleDateFormat sdf =
+				(SimpleDateFormat)SimpleDateFormat
+		
+		return null;
+	}
+
+}

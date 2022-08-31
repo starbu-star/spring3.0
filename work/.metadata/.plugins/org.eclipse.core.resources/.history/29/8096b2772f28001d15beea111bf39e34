@@ -1,0 +1,153 @@
+package com.jdbc.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+
+import com.jdbc.dto.BoardDTO;
+
+public class BoardDAO {
+	private SqlSessionTemplate sessionTemplate;
+	
+	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
+		this.sessionTemplate =sessionTemplate;
+	}
+	
+	//입력관련 메소드 만들기!
+	//num의 최대값 구하기!
+	
+	 public int getMaxNum() {
+		 int maxNum =0;
+		 
+		maxNum =sessionTemplate.selectOne("com.boardMapper.maxNum");
+		return maxNum; 
+	 }
+	 
+	 
+	 //입력
+	 public void insertData(BoardDTO dto) {
+		 sessionTemplate.insert("com.boardMapper,insertData",dto);
+		 	 }
+	 
+	 //전체데이터 가져오기
+	 public List<BoardDTO> getLists(int start, int end,searchKe)
+		
+			Map<String, Object> params = new HashMap<String,Object>();
+	 
+	 params.put("start", start);
+	 params.put("end", start);
+	 params.put("searchValue", start);
+	 params.put("searchKey", start);
+	 
+	 List<BoardDTO> lists = sessionTemplate.selectList("com.boardMapper.getLists",params);
+	 
+		return lists;	
+		}
+	 //전체데이터의 갯수(맨위랑 같아 )
+
+	public int getDataCount(String searchKey,String searchValue) {
+		int dataCount = 0;
+
+		 params.put("searchValue", searchValue);
+		 params.put("searchKey", searchValue);
+		 
+		 dataCount = sessionTemplate.selectOne("com.boardMapper.getDataCount")
+	}
+	//num으로 한개의 데이터 가져오기
+	public BoardDTO getReadData(int num) {
+		BoardDTO dto = 
+				sessionTemplate.selectOne("com.boardMapper.getReadData",num);
+	}
+	//조회수 증가 메소드
+	public int updateHitCount(int num) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		String sql;
+		
+		try {
+			sql = "update board set hitCount = hitCount + 1 where num=?";
+			
+			pstmt =conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			result =pstmt.executeUpdate();
+			
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return result;
+		
+		
+		
+	}
+	
+	//수정
+	public int updateData(BoardDTO dto) {
+		
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		String sql;
+
+		try {
+			sql = "update board set name=?,pwd=?,email=?,subject=?,";
+			sql += "content=? where num=?";
+
+			pstmt = conn.prepareStatement(sql);
+
+		
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getPwd());
+			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(4, dto.getSubject());
+			pstmt.setString(5, dto.getContent());
+			pstmt.setInt(6, dto.getNum());
+		
+
+			result = pstmt.executeUpdate();
+
+			pstmt.close();
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+
+	}
+	//삭제
+	public int deleteData(int num) {
+		int result = 0;
+
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			sql="delete board where num=?";
+					
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
+			pstmt.close();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+}
+
+
+	
+		
+	
