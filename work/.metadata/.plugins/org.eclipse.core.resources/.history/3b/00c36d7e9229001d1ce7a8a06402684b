@@ -1,0 +1,25 @@
+package com.exe.board;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class AnswerTest {
+	@Autowired
+	private QuestionRepository questionRepository;
+	
+	@Autowired
+	private AnswerRepository answerRepository;
+	
+	@Test
+	void replaySave() {
+		Optional<Question> op=questionRepository.findById(2); //2번에 해당되는 답글 달려고함
+		
+		assertTrue(op.isPresent());
+		Question question=op.get();
+		
+		Answer a = new Answer();
+	}
+
+}

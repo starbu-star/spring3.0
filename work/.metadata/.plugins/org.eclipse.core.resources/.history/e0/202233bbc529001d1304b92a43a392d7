@@ -1,0 +1,37 @@
+
+<html layout:decorate="~{layout}"> <!-- layout상속받겠다. -->
+<meta charset="UTF-8">
+
+
+<div layout:fragment="content" class="container my-3">
+
+
+
+<table class="table">
+<thead class="table-dark">                                                    
+<tr>
+	<th>번호</th>
+	<th>제목</th>
+	<th>내용</th>
+	<th>작성일시</th>
+</tr>
+</thead>
+<!-- timeleaf -->
+<tbody>
+	<tr th:each="question,loop : ${lists}"><!-- 반복문으로 꺼내오는거 foreach문 -->
+	<td th:text="${loop.count}">
+		<td>
+		<a th:href="@{|/question/detail/${question.id}|}"
+		th:text="${question.subject}"></a>
+		</td>
+		<td th:text="${question.content}"></td>
+		<td th:text="${#temporals.format(question.createdDate,'yyyy-MM-dd HH:mm')}"></td>
+	</tr>
+</tbody>
+
+</table>
+<a th:href="@{/question/create}" class="btn btn-primary">질문 왜 안되는거냐!!</a>
+ </div>
+
+
+</html>

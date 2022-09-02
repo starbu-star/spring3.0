@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"> <!-- 태블릿 폰 이런거 안가리고 디자인 동일하게 -->
+<title>SpringBootBoard</title>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}"/>
+
+</head>
+<body>
+<h2 class="container my-5">Spring Boot Board</h2>
+
+<th:block layout:fragment="content"></th:block> <!-- 탬플릿에 삽일될 위치 -->
+
+
+
+
+</body>
+</html>

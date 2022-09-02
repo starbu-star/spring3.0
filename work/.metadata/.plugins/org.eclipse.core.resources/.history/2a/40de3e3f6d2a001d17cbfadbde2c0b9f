@@ -1,0 +1,71 @@
+package com.exe.board.question;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.exe.board.answer.AnswerForm;
+
+import groovy.lang.Binding;
+import lombok.RequiredArgsConstructor;
+@RequestMapping("/question")
+@RequiredArgsConstructor
+@Controller
+public class QuestionController {
+	
+	//private final QuestionRepository questionRepository;
+	//이제 저 위에 친구 대신 service 가 필요하다.
+	private final QuestionService questionService;
+	
+	
+	@RequestMapping("/list")
+	public String list(Model model,@PageableDefault Pageable pageable) {
+		
+		Page<Question> paging = questionService.getList(pageable);//이렇게 하면 다른곳에서 전체 데이터 필요하면 getlist 만 계속 호출해주면 된다.
+		//List<Question> lists = questionRepository.findAll();
+		model.addAttribute("lists",paging);
+		
+		return "question_list";
+	}
+	//템플릿의 종류 
+	//Thymeleaf/Mustache/Groovy/freemarke/Velocity
+	@RequestMapping("/detail/{id}")
+	public String detail(Model model,@PathVariable("id") Integer id,
+			AnswerForm answerForm) {
+		Question question = questionService.getQuestion(id);
+		
+		model.addAttribute("question",question);
+		
+		return "question_detail";
+	}
+	@GetMapping("/create")
+	public String questionCreate(QuestionForm questioForm) { //입력창을 실제로 띄웠을때도 검사해라 
+		return "question_form";
+	}
+	//질문하기 > 등록하기 클릭하면 리다이렉트 되게 해야한다.
+	@PostMapping("/create")
+	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) { //둘의 순서가 바뀌면 안된다.
+		if(bindingResult.hasErrors()) {
+			return "question_form";
+		}
+	//입력
+		questionService.create(questionForm.getSubject(), questionForm.getContent());
+		return "redirect:/question/list";
+
+	}
+	
+}
+

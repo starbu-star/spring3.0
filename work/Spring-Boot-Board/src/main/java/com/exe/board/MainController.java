@@ -13,6 +13,10 @@ public class MainController {
 		
 		return "main page";
 	}
+	@RequestMapping("/")
+	public String home() {
+		return "redirect:/question/list";
+	}
 	
 	
 }

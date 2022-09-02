@@ -1,0 +1,13 @@
+package com.exe.board.answer;
+
+import com.exe.board.question.Question;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class AnswerService {
+	private final AnswerRepository answerRepository;
+	
+	public void create(Question question,String content)
+	
+}

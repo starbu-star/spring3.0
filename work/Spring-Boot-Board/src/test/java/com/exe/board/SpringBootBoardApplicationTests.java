@@ -2,11 +2,18 @@ package com.exe.board;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.exe.board.question.Question;
+import com.exe.board.question.QuestionRepository;
+import com.exe.board.question.QuestionService;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class SpringBootBoardApplicationTests {
@@ -36,7 +43,7 @@ class SpringBootBoardApplicationTests {
 		
 		
 	}
-	*/
+	
 	
 	@Test
 	void findAll() {
@@ -48,11 +55,60 @@ class SpringBootBoardApplicationTests {
 		assertEquals("스프링 부트가 무엇인가요?",q.getSubject());
 		
 	}
-	@Test 
+/*	@Test 
 	void findBySubject() {
 		Question q =questionRepository.findBySubject("스프링 부트가 무엇인가요?");
 		
-		assertEquals(2, q.getId());
+		assertEquals(1, q.getId());
 	}
-
+	@Test
+	void findBySubjectAndContent() {
+		Question q = questionRepository.findBySubjectAndContent("스프링 부트가 무엇인가요?", "스프링 너무 어려워엽..");
+		
+		assertEquals(1, q.getId());
+	}
+	@Test
+	void findBySubjectLike() {
+		List<Question> lists = questionRepository.findBySubjectLike("스프링%");
+		Question q = lists.get(0);
+		assertEquals("스프링 부트가 무엇인가요?", q.getSubject());
+	}
+	//업데이트
+	@Test
+	void update() {
+		Optional<Question> op = questionRepository.findById(1);
+		assertTrue(op.isPresent());
+		
+		Question q = op.get();
+		q.setSubject("스프링");
+		q.setContent("스프링 부트");
+		
+		questionRepository.save(q);
+	}
+	@Test
+	void delete() {
+		assertEquals(2, questionRepository.count());
+		Optional<Question> op = questionRepository.findById(1);
+		assertTrue(op.isPresent());
+		
+		Question q = op.get();
+		questionRepository.delete(q);
+		
+		assertEquals(1, questionRepository.count());
+	}
+	*/
+	@Autowired
+	private QuestionService questionService;
+	@Test
+	void save200() {
+		
+		for (int i=1;i<=200;i++) {
+			String subject = String.format("테스트 데이터 입니다:[%3d]", i);
+			String content = String.format("스프링 부트는 어려운편입니다.:[%3d]", i);
+			
+			questionService.create(subject,content);
+		}
+	}
+	
+	
 }

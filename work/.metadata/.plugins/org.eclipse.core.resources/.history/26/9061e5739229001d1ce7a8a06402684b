@@ -1,0 +1,20 @@
+package com.exe.board;
+
+import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class AnswerTest {
+	@Autowired
+	private QuestionRepository questionRepository;
+	
+	@Autowired
+	private AnswerRepository answerRepository;
+	
+	@Test
+	void replaySave() {
+		Optional<Question> op=questionRepository.findById(2);
+	}
+
+}

@@ -1,0 +1,31 @@
+package com.exe.board.answer;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.exe.board.question.Question;
+import com.exe.board.question.QuestionService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequestMapping("/answer") //이렇게 프리픽스로 만든다
+@RequiredArgsConstructor
+@Controller
+public class AnswerController {
+	private final QuestionService questionService;
+	private final AnswerService answerService;
+	
+	@PostMapping("/create/{id}")//이렇게 하면 뒤에 메소드 따로 안써줘도 됨
+	public String createAnswer(Model model,@PathVariable("id") Integer id,
+			@RequestParam String content) {
+		Question question = questionService.getQuestion(id);
+		answerService.created(question, content);
+		
+		return String.format("redirect:/question/detail/%s", id);
+	}
+
+}

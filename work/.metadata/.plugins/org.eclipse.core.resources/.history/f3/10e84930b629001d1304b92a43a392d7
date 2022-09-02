@@ -1,0 +1,20 @@
+package com.exe.board.answer;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.exe.board.question.QuestionRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@RequestMapping("/answer") //이렇게 프리픽스로 만든다
+@RequiredArgsConstructor
+@Controller
+public class AnswerController {
+	private final QuestionRepository questionRepository;
+	private final AnswerRepository answerRepository;
+	
+	@PostMapping("/create/{id}")
+
+}
